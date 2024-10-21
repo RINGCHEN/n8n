@@ -130,8 +130,9 @@ export class NDV extends BasePage {
 		codeEditorFullscreenButton: () => cy.getByTestId('code-editor-fullscreen-button'),
 		codeEditorDialog: () => cy.getByTestId('code-editor-fullscreen'),
 		codeEditorFullscreen: () => this.getters.codeEditorDialog().find('.cm-content'),
-		nodeRunSuccessIndicator: () => cy.getByTestId('node-run-info-success'),
-		nodeRunErrorIndicator: () => cy.getByTestId('node-run-info-danger'),
+		nodeRunTooltipIndicator: () => cy.getByTestId('node-run-info'),
+		nodeRunSuccessIndicator: () => cy.getByTestId('node-run-status-success'),
+		nodeRunErrorIndicator: () => cy.getByTestId('node-run-status-danger'),
 		nodeRunErrorMessage: () => cy.getByTestId('node-error-message'),
 		nodeRunErrorDescription: () => cy.getByTestId('node-error-description'),
 		fixedCollectionParameter: (paramName: string) =>
@@ -156,7 +157,7 @@ export class NDV extends BasePage {
 			this.getters.nodeExecuteButton().first().click();
 		},
 		close: () => {
-			this.getters.backToCanvas().click();
+			this.getters.backToCanvas().click({ force: true });
 		},
 		openInlineExpressionEditor: () => {
 			cy.contains('Expression').invoke('show').click();
